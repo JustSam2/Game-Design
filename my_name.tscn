@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=3 uid="uid://u8xc1r1fxdns"]
+
+[ext_resource type="Script" path="res://MyName.gd" id="1_albqp"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1b8wl"]
+font_size = 40
+
+[node name="MyName" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_albqp")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.035
+anchor_bottom = 0.084
+offset_left = 139.0
+offset_top = 128.0
+offset_right = 814.68
+offset_bottom = 420.568
+label_settings = SubResource("LabelSettings_1b8wl")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 502.0
+offset_top = 477.0
+offset_right = 867.0
+offset_bottom = 647.0
+text = "Show"
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 475.0
+offset_right = 501.0
+offset_bottom = 645.0
+text = "Clear"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
