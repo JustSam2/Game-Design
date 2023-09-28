@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=3 uid="uid://dy65emqxcua32"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i4b01"]
+bg_color = Color(0.184314, 0.184314, 0.184314, 1)
+border_width_left = 2
+border_width_top = 1
+border_width_right = 2
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2ccje"]
+bg_color = Color(0.247059, 0.247059, 0.247059, 1)
+border_width_left = 1
+border_width_right = 1
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nqyno"]
+bg_color = Color(0.156863, 0.443137, 0.25098, 1)
+border_width_left = 2
+border_width_top = 1
+border_width_right = 2
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchor_left = -0.497
+anchor_top = -0.498
+anchor_right = 0.503
+anchor_bottom = 0.502
+offset_left = 572.544
+offset_top = 322.704
+offset_right = 572.544
+offset_bottom = 322.704
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_top = 548.0
+offset_right = 300.0
+offset_bottom = 648.0
+theme_override_font_sizes/font_size = 37
+theme_override_styles/normal = SubResource("StyleBoxFlat_i4b01")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2ccje")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_nqyno")
+text = "START"

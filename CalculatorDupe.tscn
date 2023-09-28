@@ -1,0 +1,268 @@
+[gd_scene load_steps=5 format=3 uid="uid://coh4t1s6bttjt"]
+
+[ext_resource type="Script" path="res://Calculator.gd" id="1_gl1op"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i4b01"]
+bg_color = Color(0.184314, 0.184314, 0.184314, 1)
+border_width_left = 2
+border_width_top = 1
+border_width_right = 2
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2ccje"]
+bg_color = Color(0.247059, 0.247059, 0.247059, 1)
+border_width_left = 1
+border_width_right = 1
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nqyno"]
+bg_color = Color(0.156863, 0.443137, 0.25098, 1)
+border_width_left = 2
+border_width_top = 1
+border_width_right = 2
+border_width_bottom = 5
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchor_left = -0.497
+anchor_top = -0.498
+anchor_right = 0.503
+anchor_bottom = 0.502
+offset_left = 572.544
+offset_top = 322.704
+offset_right = 572.544
+offset_bottom = 322.704
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gl1op")
+
+[node name="start" type="Button" parent="."]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 523.0
+offset_right = 350.0
+offset_bottom = 623.0
+theme_override_font_sizes/font_size = 37
+theme_override_styles/normal = SubResource("StyleBoxFlat_i4b01")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2ccje")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_nqyno")
+text = "START"
+
+[node name="clear" type="Button" parent="."]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 523.0
+offset_right = 700.0
+offset_bottom = 623.0
+theme_override_font_sizes/font_size = 37
+theme_override_styles/normal = SubResource("StyleBoxFlat_i4b01")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2ccje")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_nqyno")
+text = "CLEAR"
+
+[node name="exit" type="Button" parent="."]
+layout_mode = 0
+offset_left = 750.0
+offset_top = 523.0
+offset_right = 1050.0
+offset_bottom = 623.0
+theme_override_font_sizes/font_size = 37
+theme_override_styles/normal = SubResource("StyleBoxFlat_i4b01")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2ccje")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_nqyno")
+text = "EXIT"
+
+[node name="Divide" type="Button" parent="."]
+layout_mode = 0
+offset_left = 540.0
+offset_top = 163.0
+offset_right = 690.0
+offset_bottom = 263.0
+theme_override_font_sizes/font_size = 37
+theme_override_styles/normal = SubResource("StyleBoxFlat_i4b01")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2ccje")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_nqyno")
+text = "/"
+
+[node name="Mult" type="Button" parent="."]
+layout_mode = 0
+offset_left = 540.0
+offset_top = 43.0
+offset_right = 690.0
+offset_bottom = 143.0
+theme_override_font_sizes/font_size = 37
+theme_override_styles/normal = SubResource("StyleBoxFlat_i4b01")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2ccje")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_nqyno")
+text = "*"
+
+[node name="Add" type="Button" parent="."]
+layout_mode = 0
+offset_left = 540.0
+offset_top = 283.0
+offset_right = 690.0
+offset_bottom = 383.0
+theme_override_font_sizes/font_size = 37
+theme_override_styles/normal = SubResource("StyleBoxFlat_i4b01")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2ccje")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_nqyno")
+text = "+"
+
+[node name="Sub" type="Button" parent="."]
+layout_mode = 0
+offset_left = 540.0
+offset_top = 403.0
+offset_right = 690.0
+offset_bottom = 503.0
+theme_override_font_sizes/font_size = 37
+theme_override_styles/normal = SubResource("StyleBoxFlat_i4b01")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2ccje")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_nqyno")
+text = "-"
+
+[node name="Num0" type="Button" parent="."]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 403.0
+offset_right = 350.0
+offset_bottom = 503.0
+theme_override_font_sizes/font_size = 37
+theme_override_styles/normal = SubResource("StyleBoxFlat_i4b01")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2ccje")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_nqyno")
+text = "0"
+
+[node name="Num1" type="Button" parent="."]
+layout_mode = 0
+offset_left = 29.0
+offset_top = 43.0
+offset_right = 179.0
+offset_bottom = 143.0
+theme_override_font_sizes/font_size = 37
+theme_override_styles/normal = SubResource("StyleBoxFlat_i4b01")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2ccje")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_nqyno")
+text = "1"
+
+[node name="Num2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 43.0
+offset_right = 350.0
+offset_bottom = 143.0
+theme_override_font_sizes/font_size = 37
+theme_override_styles/normal = SubResource("StyleBoxFlat_i4b01")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2ccje")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_nqyno")
+text = "2"
+
+[node name="Num3" type="Button" parent="."]
+layout_mode = 0
+offset_left = 370.0
+offset_top = 43.0
+offset_right = 520.0
+offset_bottom = 143.0
+theme_override_font_sizes/font_size = 37
+theme_override_styles/normal = SubResource("StyleBoxFlat_i4b01")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2ccje")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_nqyno")
+text = "3"
+
+[node name="Num4" type="Button" parent="."]
+layout_mode = 0
+offset_left = 29.0
+offset_top = 163.0
+offset_right = 179.0
+offset_bottom = 263.0
+theme_override_font_sizes/font_size = 37
+theme_override_styles/normal = SubResource("StyleBoxFlat_i4b01")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2ccje")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_nqyno")
+text = "4"
+
+[node name="Num5" type="Button" parent="."]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 163.0
+offset_right = 350.0
+offset_bottom = 263.0
+theme_override_font_sizes/font_size = 37
+theme_override_styles/normal = SubResource("StyleBoxFlat_i4b01")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2ccje")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_nqyno")
+text = "5"
+
+[node name="Num6" type="Button" parent="."]
+layout_mode = 0
+offset_left = 370.0
+offset_top = 163.0
+offset_right = 520.0
+offset_bottom = 263.0
+theme_override_font_sizes/font_size = 37
+theme_override_styles/normal = SubResource("StyleBoxFlat_i4b01")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2ccje")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_nqyno")
+text = "6"
+
+[node name="Num7" type="Button" parent="."]
+layout_mode = 0
+offset_left = 29.0
+offset_top = 283.0
+offset_right = 179.0
+offset_bottom = 383.0
+theme_override_font_sizes/font_size = 37
+theme_override_styles/normal = SubResource("StyleBoxFlat_i4b01")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2ccje")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_nqyno")
+text = "7"
+
+[node name="Num8" type="Button" parent="."]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 283.0
+offset_right = 350.0
+offset_bottom = 383.0
+theme_override_font_sizes/font_size = 37
+theme_override_styles/normal = SubResource("StyleBoxFlat_i4b01")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2ccje")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_nqyno")
+text = "8"
+
+[node name="Num9" type="Button" parent="."]
+layout_mode = 0
+offset_left = 370.0
+offset_top = 283.0
+offset_right = 520.0
+offset_bottom = 383.0
+theme_override_font_sizes/font_size = 37
+theme_override_styles/normal = SubResource("StyleBoxFlat_i4b01")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2ccje")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_nqyno")
+text = "9"
+
+[node name="Result" type="Label" parent="."]
+layout_mode = 0
+offset_left = 695.0
+offset_top = 43.0
+offset_right = 1147.0
+offset_bottom = 503.0
+
+[connection signal="pressed" from="start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="clear" to="." method="_on_clear_pressed"]
+[connection signal="pressed" from="exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Divide" to="." method="_on_divide_pressed"]
+[connection signal="pressed" from="Mult" to="." method="_on_mult_pressed"]
+[connection signal="pressed" from="Add" to="." method="_on_add_pressed"]
+[connection signal="pressed" from="Sub" to="." method="_on_sub_pressed"]
+[connection signal="pressed" from="Num0" to="." method="_on_num_0_pressed"]
+[connection signal="pressed" from="Num1" to="." method="_on_num_1_pressed"]
+[connection signal="pressed" from="Num2" to="." method="_on_num_2_pressed"]
+[connection signal="pressed" from="Num3" to="." method="_on_num_3_pressed"]
+[connection signal="pressed" from="Num4" to="." method="_on_num_4_pressed"]
+[connection signal="pressed" from="Num5" to="." method="_on_num_5_pressed"]
+[connection signal="pressed" from="Num6" to="." method="_on_num_6_pressed"]
+[connection signal="pressed" from="Num7" to="." method="_on_num_7_pressed"]
+[connection signal="pressed" from="Num8" to="." method="_on_num_8_pressed"]
+[connection signal="pressed" from="Num9" to="." method="_on_num_9_pressed"]

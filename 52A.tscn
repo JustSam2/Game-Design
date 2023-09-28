@@ -1,0 +1,73 @@
+[gd_scene load_steps=2 format=3 uid="uid://bccv38c6hvcak"]
+
+[ext_resource type="Script" path="res://52A.gd" id="1_laftv"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_laftv")
+
+[node name="WidthLE" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 444.0
+offset_right = 349.0
+offset_bottom = 509.0
+
+[node name="HeightLE" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 364.0
+offset_top = 444.0
+offset_right = 663.0
+offset_bottom = 509.0
+
+[node name="ClearBTN" type="Button" parent="."]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 514.0
+offset_right = 349.0
+offset_bottom = 614.0
+theme_override_font_sizes/font_size = 32
+text = "Clear"
+
+[node name="ExitBTN" type="Button" parent="."]
+layout_mode = 0
+offset_left = 677.0
+offset_top = 514.0
+offset_right = 977.0
+offset_bottom = 614.0
+theme_override_font_sizes/font_size = 32
+text = "Exit"
+
+[node name="CalcBTN" type="Button" parent="."]
+layout_mode = 0
+offset_left = 363.0
+offset_top = 514.0
+offset_right = 663.0
+offset_bottom = 614.0
+theme_override_font_sizes/font_size = 32
+text = "Calculate"
+
+[node name="ResultLBL" type="Label" parent="."]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 337.0
+offset_right = 663.0
+offset_bottom = 437.0
+theme_override_font_sizes/font_size = 64
+
+[node name="ResultLBL2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 253.0
+offset_right = 663.0
+offset_bottom = 353.0
+theme_override_font_sizes/font_size = 64
+
+[connection signal="pressed" from="ClearBTN" to="." method="_on_clear_btn_pressed"]
+[connection signal="pressed" from="ExitBTN" to="." method="_on_exit_btn_pressed"]
+[connection signal="pressed" from="CalcBTN" to="." method="_on_calc_btn_pressed"]
