@@ -1,0 +1,181 @@
+[gd_scene load_steps=5 format=3 uid="uid://dljg0g6cu5dj"]
+
+[ext_resource type="Script" path="res://Score.gd" id="1_30w1a"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_24onn"]
+bg_color = Color(0.12549, 0.12549, 0.12549, 1)
+border_width_left = 3
+border_width_top = 2
+border_width_right = 3
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fkaud"]
+bg_color = Color(0.176471, 0.176471, 0.176471, 1)
+border_width_left = 3
+border_width_top = 2
+border_width_right = 3
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n4i0u"]
+bg_color = Color(0, 0.552941, 0.25098, 1)
+border_width_left = 3
+border_width_top = 2
+border_width_right = 3
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+corner_detail = 1
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_30w1a")
+
+[node name="+1HH" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 0.846
+offset_top = 497.0
+offset_right = 100.0
+offset_bottom = 23.792
+theme_override_constants/outline_size = 2
+theme_override_constants/h_separation = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_24onn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fkaud")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_n4i0u")
+text = "+1"
+
+[node name="-1H" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 0.846
+offset_left = 101.0
+offset_top = 497.0
+offset_right = 201.0
+offset_bottom = 23.792
+theme_override_constants/outline_size = 2
+theme_override_constants/h_separation = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_24onn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fkaud")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_n4i0u")
+text = "-1"
+
+[node name="resetH" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 0.846
+offset_left = 202.0
+offset_top = 497.0
+offset_right = 302.0
+offset_bottom = 23.792
+theme_override_constants/outline_size = 2
+theme_override_constants/h_separation = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_24onn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fkaud")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_n4i0u")
+text = "Reset"
+
+[node name="+1AA" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 0.846
+offset_left = 1052.0
+offset_top = 497.0
+offset_right = 1152.0
+offset_bottom = 23.792
+theme_override_constants/outline_size = 2
+theme_override_constants/h_separation = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_24onn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fkaud")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_n4i0u")
+text = "+1"
+
+[node name="-1A" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 0.846
+offset_left = 951.0
+offset_top = 497.0
+offset_right = 1051.0
+offset_bottom = 23.792
+theme_override_constants/outline_size = 2
+theme_override_constants/h_separation = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_24onn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fkaud")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_n4i0u")
+text = "-1"
+
+[node name="resetA" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 0.846
+offset_left = 850.0
+offset_top = 497.0
+offset_right = 950.0
+offset_bottom = 23.792
+theme_override_constants/outline_size = 2
+theme_override_constants/h_separation = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_24onn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fkaud")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_n4i0u")
+text = "Reset"
+
+[node name="Team1" type="Label" parent="."]
+layout_mode = 0
+offset_top = 573.0
+offset_right = 302.0
+offset_bottom = 648.0
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Team1lbl" type="Label" parent="."]
+layout_mode = 0
+offset_top = 421.0
+offset_right = 302.0
+offset_bottom = 496.0
+theme_override_font_sizes/font_size = 32
+text = "Team 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Team2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 850.0
+offset_top = 573.0
+offset_right = 1152.0
+offset_bottom = 648.0
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Team2lbl" type="Label" parent="."]
+layout_mode = 0
+offset_left = 850.0
+offset_top = 421.0
+offset_right = 1152.0
+offset_bottom = 496.0
+theme_override_font_sizes/font_size = 32
+text = "Team 2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="+1HH" to="." method="_on_hh_pressed"]
+[connection signal="pressed" from="-1H" to="." method="_on_h_pressed"]
+[connection signal="pressed" from="resetH" to="." method="_on_reset_h_pressed"]
+[connection signal="pressed" from="+1AA" to="." method="_on_aa_pressed"]
+[connection signal="pressed" from="-1A" to="." method="_on_a_pressed"]
+[connection signal="pressed" from="resetA" to="." method="_on_reset_a_pressed"]
