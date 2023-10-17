@@ -1,0 +1,93 @@
+[gd_scene load_steps=9 format=3 uid="uid://ij5w1jtfxp72"]
+
+[ext_resource type="Script" path="res://kbd_ctrl.gd" id="1_wl1xs"]
+[ext_resource type="PackedScene" uid="uid://t4lj73msrath" path="res://kbdplayer.tscn" id="2_pfntc"]
+[ext_resource type="Script" path="res://enemy.gd" id="3_8pafl"]
+[ext_resource type="Texture2D" uid="uid://b1au122ss3pao" path="res://icon.svg" id="4_au8et"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_3mgex"]
+b = Vector2(251, 0)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_l20lp"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_5k5al"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ele60"]
+size = Vector2(60, 60)
+
+[node name="kbd_ctrl" type="Node2D"]
+script = ExtResource("1_wl1xs")
+
+[node name="kbdplayer" parent="." instance=ExtResource("2_pfntc")]
+position = Vector2(122, 44)
+
+[node name="startplatform" type="StaticBody2D" parent="."]
+position = Vector2(4, 91)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="startplatform"]
+shape = SubResource("SegmentShape2D_3mgex")
+
+[node name="Sprite2D" type="Sprite2D" parent="startplatform"]
+position = Vector2(125.25, 0)
+scale = Vector2(251.5, 1)
+texture = SubResource("PlaceholderTexture2D_l20lp")
+
+[node name="world" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="world"]
+polygon = PackedVector2Array(-47, 44, -29, 186, 1, 352, 19, 422, 95, 482, 158, 458, 198, 459, 266, 491, 317, 492, 350, 477, 419, 461, 479, 440, 559, 400, 671, 422, 761, 362, 860, 411, 907, 413, 948, 396, 983, 377, 1015, 370, 1156, 380, 1311, 402, 1374, 427, 1411, 441, 1439, 440, 1511, 436, 1611, 355, 1669, 360, 1721, 349, 1746, 339, 1771, 255, 1828, 215, 1865, 144, 1909, 308, 1921, 400, 1903, 526, 1881, 662, 1703, 874, 1439, 934, 1189, 856, 917, 878, 563, 884, 197, 860, -143, 830, -277, 730, -231, 420, -227, 426, -193, 214, -125, 70)
+
+[node name="Polygon2D" type="Polygon2D" parent="world/CollisionPolygon2D"]
+
+[node name="interact" type="RigidBody2D" parent="."]
+position = Vector2(763, 296)
+input_pickable = true
+freeze = true
+
+[node name="Sprite2D" type="Sprite2D" parent="interact"]
+position = Vector2(-6.10352e-05, 0)
+scale = Vector2(60.5, 130.25)
+texture = SubResource("PlaceholderTexture2D_5k5al")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="interact"]
+shape = SubResource("RectangleShape2D_ele60")
+
+[node name="draggable" type="RigidBody2D" parent="."]
+freeze = true
+
+[node name="Sprite2D" type="Sprite2D" parent="draggable"]
+scale = Vector2(60.5, 60.5)
+texture = SubResource("PlaceholderTexture2D_5k5al")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="draggable"]
+shape = SubResource("RectangleShape2D_ele60")
+
+[node name="Button" type="Button" parent="draggable"]
+offset_left = -30.0
+offset_top = -30.0
+offset_right = 30.0
+offset_bottom = 30.0
+focus_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="enemy" type="RigidBody2D" parent="."]
+max_contacts_reported = 1
+contact_monitor = true
+script = ExtResource("3_8pafl")
+
+[node name="Sprite2D" type="Sprite2D" parent="enemy"]
+position = Vector2(1189, 279)
+scale = Vector2(0.46875, 0.484375)
+texture = ExtResource("4_au8et")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy"]
+position = Vector2(1189, 279)
+shape = SubResource("RectangleShape2D_ele60")
+
+[node name="Timer" type="Timer" parent="enemy"]
+
+[connection signal="mouse_entered" from="interact" to="." method="_on_interact_mouse_entered"]
+[connection signal="button_down" from="draggable/Button" to="." method="_on_button_button_down"]
+[connection signal="button_up" from="draggable/Button" to="." method="_on_button_button_up"]
+[connection signal="body_entered" from="enemy" to="enemy" method="_on_body_entered"]
+[connection signal="timeout" from="enemy/Timer" to="enemy" method="_on_timer_timeout"]
