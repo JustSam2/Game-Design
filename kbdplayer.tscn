@@ -99,22 +99,22 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mmygr"]
-radius = 11.0
-height = 44.0
+radius = 7.0
+height = 24.0
 
 [node name="kbdplayer" type="CharacterBody2D"]
 position = Vector2(127, 47)
 script = ExtResource("1_dxppr")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-7.62939e-06, 0)
-scale = Vector2(2.90625, 1.0625)
+position = Vector2(0.374998, -3.5)
+scale = Vector2(0.976563, 1.03125)
 sprite_frames = SubResource("SpriteFrames_rv1ku")
 animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, 4)
-rotation = 1.5708
+position = Vector2(1, 0)
 shape = SubResource("CapsuleShape2D_mmygr")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
