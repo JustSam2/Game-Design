@@ -1,0 +1,93 @@
+[gd_scene load_steps=10 format=3 uid="uid://0ors6y7md2mo"]
+
+[ext_resource type="Script" path="res://LangAssignments/control2D.gd" id="1_ce76s"]
+[ext_resource type="Script" path="res://LangAssignments/Exit2D1.V1.gd" id="2_pbf4v"]
+[ext_resource type="PackedScene" uid="uid://t4lj73msrath" path="res://LangAssignments/kbdplayer.tscn" id="3_kkgxn"]
+[ext_resource type="Script" path="res://LangAssignments/kbdplayer1.1V1.gd" id="4_exovf"]
+[ext_resource type="Texture2D" uid="uid://b1au122ss3pao" path="res://icon.svg" id="5_b8cl4"]
+[ext_resource type="Script" path="res://LangAssignments/enemy.gd" id="5_p07qj"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_d6763"]
+bounce = 0.05
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qqdll"]
+size = Vector2(657, 786)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fdwlo"]
+size = Vector2(60, 60)
+
+[node name="Node2D" type="Node2D"]
+position = Vector2(99, 58)
+script = ExtResource("1_ce76s")
+
+[node name="world" type="StaticBody2D" parent="."]
+position = Vector2(144, 107)
+physics_material_override = SubResource("PhysicsMaterial_d6763")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="world"]
+modulate = Color(0.231373, 0.517647, 0.286275, 1)
+position = Vector2(1801, 259)
+polygon = PackedVector2Array(-622, 48, -302, 183, -189, 240, -92, 328, 46, 387, 103, 395, 180, 401, 218, 397, 256, 375, 322, 356, 366, 356, 400, 382, 453, 371, 518, 370, 590, 349, 641, 353, 683, 349, 752, 360, 857, 358, 907, 388, 948, 396, 983, 377, 1015, 370, 1156, 380, 1311, 402, 1374, 427, 1411, 441, 1439, 440, 1511, 436, 1611, 355, 1669, 360, 1721, 349, 1746, 339, 1856, 291, 1946, 220, 2352, -1, 2756, 41, 2895, -58, 3197, -95, 3599, -103, 3803, -33, 4202, -63, 4874, -77, 5456, -77, 6143, -104, 6771, -30, 7727, -30, 8686, -30, 8214, 21, 8038, 332, 7541, 564, 6940, 1452, 5593, 1452, 5456, -76, 4874, -75, 4752, 1464, 3702, 1458, 3092, 1458, 2668, 1492, 2016, 1543, 1372, 1517, 1058, 1450, 685, 1390, 167, 1523, -265, 1535, -1104, 1433, -1416, 1493, -1548, 1296, -1950, 1467, -2100, 1419, -2328, 1359, -2591, 1251, -2699, 922, -1792, 16, -1512, 57, -1411, 19, -1074, 2, -816, -6)
+
+[node name="Polygon2D" type="Polygon2D" parent="world/CollisionPolygon2D"]
+
+[node name="Polygon2D" type="Polygon2D" parent="world"]
+position = Vector2(1, 0)
+color = Color(0.32549, 0.215686, 0.0862745, 1)
+polygon = PackedVector2Array(6684, 163, 7268, 163, 7294, 183, 7190, 184, 7269, 348, 7271, 376, 7231.15, 306.603, 7028, 186, 7060, 187, 7213, 275, 7162, 187, 6751, 189, 6737, 237, 6728, 277, 6925, 187, 6958, 188, 6834.57, 244.792, 7129, 246, 7153, 261, 6795, 263, 6710, 302, 6665, 393, 6663, 358, 6715, 186, 6634, 187)
+
+[node name="kbdExit" type="Area2D" parent="."]
+z_index = 1
+position = Vector2(5740, 245)
+script = ExtResource("2_pbf4v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="kbdExit"]
+position = Vector2(5204.5, 90)
+shape = SubResource("RectangleShape2D_qqdll")
+one_way_collision_margin = 0.0
+
+[node name="kbdplayer" parent="." instance=ExtResource("3_kkgxn")]
+position = Vector2(665, 345)
+script = ExtResource("4_exovf")
+
+[node name="enemy" type="RigidBody2D" parent="."]
+position = Vector2(458, 27)
+max_contacts_reported = 1
+contact_monitor = true
+script = ExtResource("5_p07qj")
+
+[node name="Sprite2D" type="Sprite2D" parent="enemy"]
+position = Vector2(1189, 279)
+scale = Vector2(0.46875, 0.484375)
+texture = ExtResource("5_b8cl4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy"]
+position = Vector2(1189, 279)
+shape = SubResource("RectangleShape2D_fdwlo")
+
+[node name="Timer" type="Timer" parent="enemy"]
+wait_time = 3.0
+
+[node name="enemy2" type="RigidBody2D" parent="."]
+position = Vector2(911, 148)
+max_contacts_reported = 1
+contact_monitor = true
+script = ExtResource("5_p07qj")
+
+[node name="Sprite2D" type="Sprite2D" parent="enemy2"]
+position = Vector2(1842, 343)
+scale = Vector2(0.46875, 0.484375)
+texture = ExtResource("5_b8cl4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy2"]
+position = Vector2(1842, 342)
+shape = SubResource("RectangleShape2D_fdwlo")
+
+[node name="Timer" type="Timer" parent="enemy2"]
+wait_time = 3.0
+
+[connection signal="body_entered" from="kbdExit" to="kbdExit" method="_on_body_entered"]
+[connection signal="body_entered" from="enemy" to="enemy" method="_on_body_entered"]
+[connection signal="timeout" from="enemy/Timer" to="enemy" method="_on_timer_timeout"]
+[connection signal="body_entered" from="enemy2" to="enemy2" method="_on_body_entered"]
+[connection signal="timeout" from="enemy2/Timer" to="enemy2" method="_on_timer_timeout"]

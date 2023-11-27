@@ -1,0 +1,99 @@
+[gd_scene load_steps=4 format=3 uid="uid://ciailtfhcxcyx"]
+
+[ext_resource type="PackedScene" uid="uid://bd0oi6qyxpkm6" path="res://LangAssignments/physball.tscn" id="1_5wtdy"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_qpfu1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uciiv"]
+size = Vector2(1.00177, 0.990654)
+
+[node name="phys_demo" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, 76)
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(585, 574)
+scale = Vector2(1694, 160.5)
+texture = SubResource("PlaceholderTexture2D_qpfu1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/Sprite2D"]
+position = Vector2(-0.000885487, -0.00311518)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_uciiv")
+
+[node name="Physball" parent="." instance=ExtResource("1_5wtdy")]
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 833.0
+offset_top = 1.0
+offset_right = 1153.0
+offset_bottom = 243.0
+
+[node name="acf" type="Button" parent="Panel"]
+offset_left = 19.0
+offset_top = 47.0
+offset_right = 305.0
+offset_bottom = 87.0
+text = "Apply Central Force"
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 13.0
+offset_right = 93.0
+offset_bottom = 44.0
+text = "Gravity:"
+
+[node name="GravSlider" type="HSlider" parent="Panel"]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 19.0
+offset_right = 306.0
+offset_bottom = 35.0
+
+[node name="Label3" type="Label" parent="Panel"]
+offset_left = 7.0
+offset_top = 127.0
+offset_right = 89.0
+offset_bottom = 158.0
+text = "velocity:"
+
+[node name="Label2" type="Label" parent="Panel"]
+offset_left = 8.0
+offset_top = 93.0
+offset_right = 90.0
+offset_bottom = 124.0
+text = "inertia:"
+
+[node name="Velocityx" type="LineEdit" parent="Panel"]
+offset_left = 71.0
+offset_top = 125.0
+offset_right = 182.0
+offset_bottom = 156.0
+
+[node name="Velocityy" type="LineEdit" parent="Panel"]
+offset_left = 193.0
+offset_top = 125.0
+offset_right = 304.0
+offset_bottom = 156.0
+
+[node name="Inertia" type="LineEdit" parent="Panel"]
+layout_mode = 0
+offset_left = 69.0
+offset_top = 92.0
+offset_right = 306.0
+offset_bottom = 123.0
+
+[node name="Apply" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 157.0
+offset_right = 304.0
+offset_bottom = 188.0
+text = "Apply
+"
+
+[connection signal="pressed" from="Panel/acf" to="Physball" method="_on_acf_pressed"]
+[connection signal="value_changed" from="Panel/GravSlider" to="Physball" method="_on_h_slider_value_changed"]
+[connection signal="pressed" from="Panel/Apply" to="Physball" method="_on_apply_pressed"]

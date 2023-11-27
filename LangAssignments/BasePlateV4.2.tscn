@@ -1,0 +1,65 @@
+[gd_scene load_steps=2 format=3 uid="uid://de3iomyqvwnd8"]
+
+[ext_resource type="Script" path="res://LangAssignments/AveragerV1.gd" id="1_mce1r"]
+
+[node name="Control"]
+script = ExtResource("1_mce1r")
+
+[node name="clear" parent="." index="1"]
+offset_left = 426.0
+offset_right = 726.0
+
+[node name="exit" parent="." index="2"]
+offset_left = 802.0
+offset_right = 1102.0
+
+[node name="nument1" type="LineEdit" parent="." index="3"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 413.0
+offset_right = 350.0
+offset_bottom = 513.0
+theme_override_font_sizes/font_size = 30
+placeholder_text = "4"
+
+[node name="nument2" type="LineEdit" parent="." index="4"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 288.0
+offset_right = 350.0
+offset_bottom = 388.0
+theme_override_font_sizes/font_size = 30
+placeholder_text = "3"
+
+[node name="nument3" type="LineEdit" parent="." index="5"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 38.0
+offset_right = 350.0
+offset_bottom = 138.0
+theme_override_font_sizes/font_size = 30
+placeholder_text = "1"
+
+[node name="nument4" type="LineEdit" parent="." index="6"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 163.0
+offset_right = 350.0
+offset_bottom = 263.0
+theme_override_font_sizes/font_size = 30
+placeholder_text = "2"
+
+[node name="Version" type="Label" parent="." index="7"]
+layout_mode = 0
+offset_right = 348.0
+offset_bottom = 23.0
+text = "Averager V1 28/9/23"
+
+[node name="output" type="Label" parent="." index="8"]
+layout_mode = 0
+offset_left = 370.0
+offset_top = 38.0
+offset_right = 727.0
+offset_bottom = 513.0
+theme_override_font_sizes/font_size = 40
+vertical_alignment = 1

@@ -1,0 +1,68 @@
+[gd_scene load_steps=2 format=3 uid="uid://di1fpqe5gyhjh"]
+
+[ext_resource type="Script" path="res://LangAssignments/65HBrit-to-Brit.gd" id="1_86jso"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_86jso")
+
+[node name="Calc" type="Button" parent="."]
+layout_mode = 0
+offset_top = 598.0
+offset_right = 300.0
+offset_bottom = 648.0
+text = "Calculate"
+
+[node name="Reset" type="Button" parent="."]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 505.0
+offset_right = 355.0
+offset_bottom = 648.0
+text = "Reset"
+
+[node name="Exit" type="Button" parent="."]
+layout_mode = 0
+offset_left = 355.0
+offset_top = 505.0
+offset_right = 410.0
+offset_bottom = 648.0
+text = "Exit
+"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_top = 460.0
+offset_right = 300.0
+offset_bottom = 504.0
+text = "Result:"
+
+[node name="shillings" type="LineEdit" parent="."]
+layout_mode = 0
+offset_top = 567.0
+offset_right = 300.0
+offset_bottom = 598.0
+placeholder_text = "Shillings"
+
+[node name="pounds" type="LineEdit" parent="."]
+layout_mode = 0
+offset_top = 505.0
+offset_right = 300.0
+offset_bottom = 536.0
+placeholder_text = "Pounds"
+
+[node name="pence" type="LineEdit" parent="."]
+layout_mode = 0
+offset_top = 536.0
+offset_right = 300.0
+offset_bottom = 567.0
+placeholder_text = "Pence"
+
+[connection signal="pressed" from="Calc" to="." method="_on_calc_pressed"]
+[connection signal="pressed" from="Reset" to="." method="_on_reset_pressed"]
+[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]

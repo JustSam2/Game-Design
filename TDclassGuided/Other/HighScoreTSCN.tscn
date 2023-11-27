@@ -1,0 +1,56 @@
+[gd_scene load_steps=2 format=3 uid="uid://cam7xw6xb3wle"]
+
+[ext_resource type="Script" path="res://TDclassGuided/Other/HighScoreCode.gd" id="1_ih3km"]
+
+[node name="high_scores" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ih3km")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 561.0
+offset_right = 182.0
+offset_bottom = 641.0
+text = "Add Score
+"
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 185.0
+offset_top = 561.0
+offset_right = 357.0
+offset_bottom = 641.0
+text = "Remove Score
+"
+
+[node name="LineEdit" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 527.0
+offset_right = 549.0
+offset_bottom = 558.0
+placeholder_text = "Score"
+
+[node name="LineEdit2" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 361.0
+offset_top = 563.0
+offset_right = 552.0
+offset_bottom = 594.0
+placeholder_text = "Score Removal Number"
+
+[node name="ItemList" type="ItemList" parent="."]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 9.0
+offset_right = 550.0
+offset_bottom = 523.0
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dr7jltveyp2bl"]
+
+[ext_resource type="PackedScene" uid="uid://68b3nndn57yo" path="res://TDclassGuided/Entities/TDP.tscn" id="1_sntux"]
+
+[sub_resource type="TileSet" id="TileSet_e07c5"]
+
+[node name="TDG" type="Node2D"]
+
+[node name="TDplayer" parent="." instance=ExtResource("1_sntux")]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_e07c5")
+format = 2
+
+[node name="TileMap2" type="TileMap" parent="."]
+format = 2

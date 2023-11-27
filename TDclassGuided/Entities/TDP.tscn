@@ -1,0 +1,432 @@
+[gd_scene load_steps=37 format=3 uid="uid://68b3nndn57yo"]
+
+[ext_resource type="Texture2D" uid="uid://bshkygsi8g3d" path="res://TDclassGuided/Entities/characters.png" id="1_rjpbb"]
+
+[sub_resource type="GDScript" id="GDScript_pdg4r"]
+script/source = "extends CharacterBody2D
+
+
+const SPEED = 200.0
+const MAX_OBT_HEALTH = 1000.0
+
+enum STATES { IDLE=0, DEAD, DAMAGED, ATTACKING, CHARGING }
+
+@export var data = {
+	\"max_health\":100.0,
+	\"health\":100.0,
+	\"money\":10,
+	\"state\": STATES.IDLE,
+}
+
+var inertia = Vector2()
+var look_direction = Vector2.DOWN  # (0, 1)
+var attack_direction = Vector2.DOWN
+var animation_lock = 0.0 #lock player while attacking.
+var damage_lock = 0.0
+var charge_time = 2.5
+var charge_start_time = 0.0
+
+
+
+var slash_scene = preload(\"res://TDclassGuided/gfx/slash.tscn\")
+var menu_scene = preload(\"res://TDclassGuided/Assets/GUI.tscn\")
+var menu_instance = null
+
+@onready var p_hud = get_tree().get_first_node_in_group(\"hud\")
+
+func get_direction_name():
+	return [\"right\", \"down\", \"left\", \"up\"][
+		int(round(look_direction.angle() * 2 / PI)) % 4 ]
+
+func attack():
+	data.state = STATES.ATTACKING
+	if get_direction_name() == \"left\":
+		$AnimatedSprite2D.flip_h = 0
+	$AnimatedSprite2D.play(\"attack_\" + get_direction_name())
+	var slash = slash_scene.instantiate()
+	slash.position = attack_direction * 20.0
+	slash.rotation = Vector2().angle_to_point(-attack_direction)
+	add_child(slash)
+	animation_lock = 0.2
+
+func charged_attack():
+	data.state = STATES.ATTACKING
+	$AnimatedSprite2D.play(\"attack_idle\")
+	attack_direction = look_direction
+	damage_lock = 0.3
+
+	for i in range(9):
+		var angle = -attack_direction.angle() + (i-4) * PI / 4
+		var dir = Vector2(cos(angle), sin(angle))
+		var slash = slash_scene.instantiate()
+		slash.position = dir * 20.0
+		slash.rotation = Vector2().angle_to_point(-dir)
+		slash.damage *= 1.5
+		add_child(slash)
+		await get_tree().create_timer(0.03).timeout
+		#offset by (i-4) * 45 degrees
+	
+	animation_lock = 0.2
+	data.state = STATES.IDLE
+	await $AnimatedSprite2D.animation_finished
+	pass
+
+func pickup_health(value):
+	data.health += value
+	data.health = clamp(data.health, 0, data.max_health)
+
+func pickup_money(value):
+	data.money += value
+func _ready():
+	menu_instance = menu_scene.instantiate()
+	get_tree().get_root().add_child.call_deferred(menu_instance)
+	menu_instance.hide()
+
+func _physics_process(delta):
+	animation_lock = max(animation_lock-delta, 0.0)
+	if animation_lock == 0.0 and data.state != STATES.DEAD:
+		# todo : damage and charging
+		if data.state != STATES.CHARGING:
+			data.state = STATES.IDLE
+		
+		
+		var direction = Vector2(
+			Input.get_axis(\"ui_left\", \"ui_right\"),
+			Input.get_axis(\"ui_up\", \"ui_down\")
+		).normalized()  # Scale to 1 to prevent speed boost
+		update_animation(direction)
+		if direction.length() > 0:
+			look_direction = direction
+			velocity = direction * SPEED
+		else:
+			velocity = velocity.move_toward(Vector2(), SPEED)
+		
+		velocity += inertia
+		move_and_slide()
+		inertia = inertia.move_toward(Vector2(), delta * 1000.0)
+		
+	if data.state != STATES.DEAD:
+		if Input.is_action_just_pressed(\"ui_accept\"):
+			attack()
+	
+	
+	if Input.is_action_just_pressed(\"ui_cancel\"):
+		menu_instance.show()
+		get_tree().paused = true
+
+
+func update_animation(direction):
+	if data.state == STATES.IDLE:
+		
+		var a_name = \"idle\"  # Default
+		if direction.length() > 0:
+			look_direction = direction
+			a_name = \"side\"
+			if direction.x != 0:
+				a_name = \"side\"
+				$AnimatedSprite2D.flip_h = direction.x < 0
+			elif direction.y < 0:
+				a_name = \"up\"
+			elif direction.y > 0:
+				a_name = \"side\"
+			$AnimatedSprite2D.play()
+		else:
+			if look_direction.x != 0:
+				a_name = \"idle\"
+				$AnimatedSprite2D.flip_h = look_direction.x < 0
+			elif look_direction.y < 0:
+				a_name = \"idle\"
+			elif look_direction.y > 0:
+				a_name = \"idle\"
+				$AnimatedSprite2D.play()
+		
+		if $AnimatedSprite2D.animation != a_name:
+			$AnimatedSprite2D.animation = a_name
+			$AnimatedSprite2D.play()
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5il0x"]
+size = Vector2(19, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fkuo1"]
+atlas = ExtResource("1_rjpbb")
+region = Rect2(384, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lpbso"]
+atlas = ExtResource("1_rjpbb")
+region = Rect2(416, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q4th2"]
+atlas = ExtResource("1_rjpbb")
+region = Rect2(320, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8lvvh"]
+atlas = ExtResource("1_rjpbb")
+region = Rect2(384, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jlw0r"]
+atlas = ExtResource("1_rjpbb")
+region = Rect2(416, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xdg3p"]
+atlas = ExtResource("1_rjpbb")
+region = Rect2(320, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6m5kv"]
+atlas = ExtResource("1_rjpbb")
+region = Rect2(384, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7qmea"]
+atlas = ExtResource("1_rjpbb")
+region = Rect2(416, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ki14p"]
+atlas = ExtResource("1_rjpbb")
+region = Rect2(320, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c7v7u"]
+atlas = ExtResource("1_rjpbb")
+region = Rect2(704, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f2pv1"]
+atlas = ExtResource("1_rjpbb")
+region = Rect2(640, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ylcot"]
+atlas = ExtResource("1_rjpbb")
+region = Rect2(672, 64, 32, 32)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1sbbd"]
+load_path = "res://.godot/imported/characters.png-6325af6d396ec6fa740b63b46580ff20.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_semxf"]
+atlas = SubResource("CompressedTexture2D_1sbbd")
+region = Rect2(576, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7po52"]
+atlas = SubResource("CompressedTexture2D_1sbbd")
+region = Rect2(608, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uxwty"]
+atlas = SubResource("CompressedTexture2D_1sbbd")
+region = Rect2(640, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n7prw"]
+atlas = SubResource("CompressedTexture2D_1sbbd")
+region = Rect2(672, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_71gyt"]
+atlas = SubResource("CompressedTexture2D_1sbbd")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ff8xt"]
+atlas = SubResource("CompressedTexture2D_1sbbd")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jj8cm"]
+atlas = SubResource("CompressedTexture2D_1sbbd")
+region = Rect2(128, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1kxdy"]
+atlas = SubResource("CompressedTexture2D_1sbbd")
+region = Rect2(128, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_njwpl"]
+atlas = SubResource("CompressedTexture2D_1sbbd")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cnibc"]
+atlas = SubResource("CompressedTexture2D_1sbbd")
+region = Rect2(224, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4l040"]
+atlas = SubResource("CompressedTexture2D_1sbbd")
+region = Rect2(224, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_watxn"]
+atlas = SubResource("CompressedTexture2D_1sbbd")
+region = Rect2(448, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fel4q"]
+atlas = SubResource("CompressedTexture2D_1sbbd")
+region = Rect2(480, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ess5"]
+atlas = SubResource("CompressedTexture2D_1sbbd")
+region = Rect2(512, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jd0f6"]
+atlas = SubResource("CompressedTexture2D_1sbbd")
+region = Rect2(544, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sp4vw"]
+atlas = SubResource("CompressedTexture2D_1sbbd")
+region = Rect2(576, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jtpvn"]
+atlas = SubResource("CompressedTexture2D_1sbbd")
+region = Rect2(608, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_btjo7"]
+atlas = SubResource("CompressedTexture2D_1sbbd")
+region = Rect2(640, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_drv50"]
+atlas = SubResource("CompressedTexture2D_1sbbd")
+region = Rect2(672, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s23tk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fkuo1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lpbso")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q4th2")
+}],
+"loop": true,
+"name": &"attack_down",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8lvvh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jlw0r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xdg3p")
+}],
+"loop": true,
+"name": &"attack_idle",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6m5kv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7qmea")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ki14p")
+}],
+"loop": true,
+"name": &"attack_right",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c7v7u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f2pv1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ylcot")
+}],
+"loop": true,
+"name": &"attack_up",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_semxf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7po52")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uxwty")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n7prw")
+}],
+"loop": true,
+"name": &"down",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_71gyt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ff8xt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jj8cm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1kxdy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_njwpl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_njwpl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cnibc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4l040")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_watxn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fel4q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ess5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jd0f6")
+}],
+"loop": true,
+"name": &"side",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sp4vw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jtpvn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_btjo7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_drv50")
+}],
+"loop": true,
+"name": &"up",
+"speed": 12.0
+}]
+
+[node name="TDplayer" type="CharacterBody2D" groups=["Player"]]
+z_index = 4096
+script = SubResource("GDScript_pdg4r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 4)
+shape = SubResource("RectangleShape2D_5il0x")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_s23tk")
+animation = &"attack_idle"
+frame = 1
+frame_progress = 0.851822
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)

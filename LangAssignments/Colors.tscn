@@ -1,0 +1,72 @@
+[gd_scene load_steps=3 format=3 uid="uid://cr4oewiel8phu"]
+
+[ext_resource type="Script" path="res://TDgameClassGuided/Small Game.gd" id="1_fmwpm"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_r2i0x"]
+font_size = 64
+
+[node name="Colors" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fmwpm")
+
+[node name="Display" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 0.177
+offset_left = 2.0
+offset_right = 1151.0
+offset_bottom = 439.304
+label_settings = SubResource("LabelSettings_r2i0x")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Red" type="Button" parent="."]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 554.0
+offset_right = 249.0
+offset_bottom = 648.0
+text = "Red"
+
+[node name="Blue" type="Button" parent="."]
+layout_mode = 0
+offset_left = 249.0
+offset_top = 554.0
+offset_right = 496.0
+offset_bottom = 648.0
+text = "Blue"
+
+[node name="Green" type="Button" parent="."]
+layout_mode = 0
+offset_left = 657.0
+offset_top = 554.0
+offset_right = 904.0
+offset_bottom = 647.0
+text = "Green"
+
+[node name="Yellow" type="Button" parent="."]
+layout_mode = 0
+offset_left = 904.0
+offset_top = 554.0
+offset_right = 1151.0
+offset_bottom = 647.0
+text = "Yellow"
+
+[node name="Clear" type="Button" parent="."]
+layout_mode = 0
+offset_left = 496.0
+offset_top = 554.0
+offset_right = 657.0
+offset_bottom = 648.0
+text = "Clear"
+
+[connection signal="pressed" from="Red" to="." method="_on_red_pressed"]
+[connection signal="pressed" from="Blue" to="." method="_on_blue_pressed"]
+[connection signal="pressed" from="Green" to="." method="_on_green_pressed"]
+[connection signal="pressed" from="Yellow" to="." method="_on_yellow_pressed"]
+[connection signal="pressed" from="Clear" to="." method="_on_clear_pressed"]

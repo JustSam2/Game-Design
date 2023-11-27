@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://0ave2vg3hmgf"]
+
+[ext_resource type="Texture2D" uid="uid://bp45hqxhyf82p" path="res://TDclassGuided/gfx/Slash.png" id="1_34qcs"]
+[ext_resource type="Script" path="res://TDclassGuided/gfx/slash.gd" id="2_25p00"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pepng"]
+radius = 5.0
+height = 16.0
+
+[node name="slash" type="Area2D"]
+script = ExtResource("2_25p00")
+
+[node name="slasheffect" type="Sprite2D" parent="."]
+texture = ExtResource("1_34qcs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_pepng")
