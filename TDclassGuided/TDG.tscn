@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dr7jltveyp2bl"]
+[gd_scene load_steps=4 format=3 uid="uid://dr7jltveyp2bl"]
 
 [ext_resource type="PackedScene" uid="uid://68b3nndn57yo" path="res://TDclassGuided/Entities/TDP.tscn" id="1_sntux"]
+[ext_resource type="PackedScene" uid="uid://b3a771sf8mege" path="res://TDclassGuided/gfx/hud.tscn" id="2_057km"]
 
 [sub_resource type="TileSet" id="TileSet_e07c5"]
 
@@ -14,3 +15,5 @@ format = 2
 
 [node name="TileMap2" type="TileMap" parent="."]
 format = 2
+
+[node name="HUD" parent="." instance=ExtResource("2_057km")]

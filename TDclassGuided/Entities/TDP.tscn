@@ -35,12 +35,13 @@ var menu_instance = null
 @onready var p_hud = get_tree().get_first_node_in_group(\"hud\")
 
 func get_direction_name():
-	return [\"right\", \"down\", \"left\", \"up\"][
-		int(round(look_direction.angle() * 2 / PI)) % 4 ]
+	return [\"right\", \"down\", \"idle\", \"up\"][
+		int(round(look_direction.angle() * 2 / PI)) % 4
+		]
 
 func attack():
 	data.state = STATES.ATTACKING
-	if get_direction_name() == \"left\":
+	if get_direction_name() == \"idle\":
 		$AnimatedSprite2D.flip_h = 0
 	$AnimatedSprite2D.play(\"attack_\" + get_direction_name())
 	var slash = slash_scene.instantiate()
@@ -84,6 +85,9 @@ func _ready():
 
 func _physics_process(delta):
 	animation_lock = max(animation_lock-delta, 0.0)
+	damage_lock = max(damage_lock - delta, 0.0)
+	
+	
 	if animation_lock == 0.0 and data.state != STATES.DEAD:
 		# todo : damage and charging
 		if data.state != STATES.CHARGING:
@@ -108,6 +112,18 @@ func _physics_process(delta):
 	if data.state != STATES.DEAD:
 		if Input.is_action_just_pressed(\"ui_accept\"):
 			attack()
+			charge_start_time = Time.get_time_dict_from_system().second
+			data.state = STATES.CHARGING
+		
+		if Input.is_action_just_released(\"ui_cancel\"):
+			var ctime = Time.get_datetime_dict_from_system().second
+			var charge_dur = ctime - charge_start_time
+			if charge_dur >= charge_time and data.state == STATES.CHARGING:
+				charged_attack()
+			else:
+				data.states = STATES.IDLE
+		
+		
 	
 	
 	if Input.is_action_just_pressed(\"ui_cancel\"):
@@ -425,8 +441,6 @@ shape = SubResource("RectangleShape2D_5il0x")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_s23tk")
 animation = &"attack_idle"
-frame = 1
-frame_progress = 0.851822
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
