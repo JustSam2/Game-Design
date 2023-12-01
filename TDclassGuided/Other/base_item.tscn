@@ -39,7 +39,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="BaseItem" type="Node2D"]
+[node name="BaseItem" type="Node2D" groups=["Items"]]
 script = ExtResource("1_dwrj4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

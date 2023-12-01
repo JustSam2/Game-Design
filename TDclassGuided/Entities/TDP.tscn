@@ -6,7 +6,7 @@
 script/source = "extends CharacterBody2D
 
 
-const SPEED = 200.0
+const SPEED = 100.0
 const MAX_OBT_HEALTH = 1000.0
 
 enum STATES { IDLE=0, DEAD, DAMAGED, ATTACKING, CHARGING }
@@ -32,6 +32,9 @@ var slash_scene = preload(\"res://TDclassGuided/gfx/slash.tscn\")
 var menu_scene = preload(\"res://TDclassGuided/Assets/GUI.tscn\")
 var menu_instance = null
 
+signal health_depleted
+
+
 @onready var p_hud = get_tree().get_first_node_in_group(\"hud\")
 
 func get_direction_name():
@@ -55,7 +58,6 @@ func charged_attack():
 	$AnimatedSprite2D.play(\"attack_idle\")
 	attack_direction = look_direction
 	damage_lock = 0.3
-
 	for i in range(9):
 		var angle = -attack_direction.angle() + (i-4) * PI / 4
 		var dir = Vector2(cos(angle), sin(angle))
@@ -67,9 +69,27 @@ func charged_attack():
 		await get_tree().create_timer(0.03).timeout
 		#offset by (i-4) * 45 degrees
 	
+
 	animation_lock = 0.2
 	data.state = STATES.IDLE
 	await $AnimatedSprite2D.animation_finished
+	pass
+
+func take_damage(dmg):
+	if damage_lock == 0.0:
+		data.health -= dmg
+		data.state = STATES.DAMAGED
+		damage_lock = 0.5
+		animation_lock = dmg * 0.005
+		#do shader here. also hurt noise
+		if data.health <= 0.0:
+			data.state = STATES.DEAD
+			#death animation and noise
+			await get_tree().create_timer(0.5).timeout
+			health_depleted.emit()
+		else:
+			#damage sound goes here
+			pass
 	pass
 
 func pickup_health(value):
