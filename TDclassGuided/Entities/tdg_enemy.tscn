@@ -128,7 +128,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_blepv")
 }],
 "loop": true,
-"name": &"walk_down",
+"name": &"e_walk_down",
 "speed": 4.0
 }, {
 "frames": [{
@@ -145,7 +145,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_bfk5u")
 }],
 "loop": true,
-"name": &"walk_left",
+"name": &"e_walk_left",
 "speed": 4.0
 }, {
 "frames": [{
@@ -162,7 +162,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_7mlv0")
 }],
 "loop": true,
-"name": &"walk_right",
+"name": &"e_walk_right",
 "speed": 4.0
 }, {
 "frames": [{
@@ -179,7 +179,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_71clk")
 }],
 "loop": true,
-"name": &"walk_up",
+"name": &"e_walk_up",
 "speed": 4.0
 }]
 
@@ -195,8 +195,7 @@ script = ExtResource("1_4s1ui")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_i6hxq")
-animation = &"walk_left"
-frame_progress = 0.99957
+animation = &"e_walk_up"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
@@ -218,3 +217,5 @@ target_position = Vector2(-145, -50)
 [node name="RCM" type="RayCast2D" parent="."]
 exclude_parent = false
 target_position = Vector2(-150, 0)
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="."]

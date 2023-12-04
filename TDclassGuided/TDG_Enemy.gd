@@ -22,9 +22,36 @@ var vision_dist = 145.0
 var money_value = 5
 
 signal recovered
+@onready var anim_player = $AnimatedSprite2D
+@onready var aud = $Sound
 @onready var rcl = $RCL
 @onready var rcm = $RCM
 @onready var rcr = $RCR
+var death_sound = preload("res://TDclassGuided/Assets/Sounds/HurtOrDead.wav")
+var drops = ["drops_coin", "drops_heart"]
+
+#fix Heart.TSCN and Coin.TSCN then fix the below section
+#add drops via preload
+# func vector2(randi_range(-10.0, 10,0), randi_range(-10.0, 10.0))
+#	item_scene.global_position = self.global_position + vec2_offset()
+#	get_tree().current_scene.add_child(item_scene)
+
+#func drop_heart():
+#	var heart = heart_scene.instantiate()
+#	drop_scene(heart)
+
+#func drop_heart():
+#	var coin = coin_scene.instantiate()
+#	coin.value = money_value
+#	drop_scene(coin)
+
+#func drop_item():
+#	var num_drops = randi() % 3 + 1
+#	for i in range(num_drops):
+#		var rnd_drop  = drops(randi() drops.size())
+#		call_deferred(rnd_drop)
+#after the above is fixed, remember to enable it in the death command
+
 
 var state_directions = [
 	Vector2.ZERO,
@@ -37,6 +64,19 @@ var state_directions = [
 	Vector2(-1, 1).normalized(), #down left
 	Vector2(1, 1).normalized(), #down right
 	Vector2.ZERO
+]
+
+var state_animations = [
+	"e_walk_up",
+	"e_walk_down",
+	"e_walk_right",
+	"e_walk_left",
+	
+	"e_walk_left",
+	"e_walk_right",
+	
+	"e_walk_left",
+	"e_walk_right"
 ]
 
 func turn_toward_player_location(location: Vector2):
@@ -61,7 +101,9 @@ func take_damage(dmg, attacker=null):
 		animation_lock = 0.2
 		#todo damage_intensity and shader
 		if health <= 0:
-			#play sound and die
+			aud.stream = death_sound
+			await aud.finished
+			#drop_item()
 			queue_free()
 		else:
 			if attacker != null:
@@ -101,24 +143,12 @@ func _physics_process(delta):
 		var direction = state_directions[int(ai_state)]
 		velocity = direction * SPEED
 		
+		var animation = state_animations[int(ai_state)]
+		if animation and not anim_player.is_playing():
+			anim_player.play(animation)
 		#reminder; walk animations
+		if ai_state == STATES.IDLE and anim_player.is_playing():
+			anim_player.stop()
+		
 		
 		velocity += inertia.move_toward(Vector2(), delta * 1000.0)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
