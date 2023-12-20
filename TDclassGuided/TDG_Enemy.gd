@@ -29,6 +29,7 @@ signal recovered
 @onready var rcr = $RCR
 var death_sound = preload("res://TDclassGuided/Assets/Sounds/HurtOrDead.wav")
 var drops = ["drops_coin", "drops_heart"]
+var damage_shader = preload("res://TDclassGuided/Assets/Shaders/takedamage.gdshader")
 
 #fix Heart.TSCN and Coin.TSCN then fix the below section
 #add drops via preload
@@ -93,7 +94,7 @@ func turn_toward_player_location(location: Vector2):
 			closest_state = STATES.values()[i]
 		ai_state = closest_state
 
-func take_damage(dmg, attacker=null):
+func take_damage(damage, attacker=null):
 	if damage_lock == 0.0:
 		ai_state = STATES.DAMAGED
 		health -= damage

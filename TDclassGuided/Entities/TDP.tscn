@@ -25,11 +25,13 @@ var animation_lock = 0.0 #lock player while attacking.
 var damage_lock = 0.0
 var charge_time = 2.5
 var charge_start_time = 0.0
-
+var health = 100.0
+var max_health = 100.0
 
 
 var slash_scene = preload(\"res://TDclassGuided/gfx/slash.tscn\")
 var menu_scene = preload(\"res://TDclassGuided/Assets/GUI.tscn\")
+var damage_shader = preload(\"res://TDclassGuided/Assets/Shaders/takedamage.gdshader\")
 var menu_instance = null
 
 signal health_depleted
@@ -82,6 +84,9 @@ func take_damage(dmg):
 		damage_lock = 0.5
 		animation_lock = dmg * 0.005
 		#do shader here. also hurt noise
+		var damage_intensity = clamp(1.0 - ((health+0.01)/max_health), 0.1, 0.8)
+		$AnimatedSprite2D.material = damage_shader.duplicate()
+		$AnimatedSprite2D.material.set_shader_perameter(\"intensity\", damage_intensity)
 		if data.health <= 0.0:
 			data.state = STATES.DEAD
 			#death animation and noise
